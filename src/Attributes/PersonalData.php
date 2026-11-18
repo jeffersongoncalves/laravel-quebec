@@ -3,6 +3,7 @@
 namespace JeffersonGoncalves\Quebec\Attributes;
 
 use Attribute;
+use JeffersonGoncalves\Privacy\Attributes\PersonalDataAttribute;
 use JeffersonGoncalves\Quebec\Enums\AnonymizeStrategy;
 use JeffersonGoncalves\Quebec\Enums\DataCategory;
 
@@ -13,17 +14,19 @@ use JeffersonGoncalves\Quebec\Enums\DataCategory;
  * identifies, locates or profiles the person (s. 8.1).
  */
 #[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
-final class PersonalData
+final class PersonalData extends PersonalDataAttribute
 {
     public function __construct(
         public string $column,
         public DataCategory $category = DataCategory::Personal,
         public ?string $purpose = null,
         public ?string $retention = null,
-        public AnonymizeStrategy $anonymize = AnonymizeStrategy::Nullify,
+        AnonymizeStrategy $anonymize = AnonymizeStrategy::Nullify,
         public bool $outsideQuebec = false,
         public bool $profiling = false,
-    ) {}
+    ) {
+        $this->anonymize = $anonymize;
+    }
 
     /**
      * @return array{column: string, category: string, purpose: string|null, retention: string|null, anonymize: string, outside_quebec: bool, profiling: bool}
