@@ -1,0 +1,70 @@
+{
+    "name": "jeffersongoncalves/laravel-quebec",
+    "description": "Quebec Law 25 (private sector privacy act) for Laravel: a personal information inventory with sensitive information, communications outside Quebec and profiling flagged, export and anonymization",
+    "keywords": [
+        "laravel",
+        "privacy",
+        "quebec",
+        "law-25",
+        "loi-25",
+        "personal-information"
+    ],
+    "homepage": "https://github.com/jeffersongoncalves/laravel-quebec",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jefferson Simão Gonçalves",
+            "email": "gerson.simao.92@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "spatie/laravel-package-tools": "^1.16",
+        "illuminate/contracts": "^12.0|^13.0"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.24",
+        "orchestra/testbench": "^10.0|^11.0",
+        "pestphp/pest": "^3.0|^4.0",
+        "pestphp/pest-plugin-laravel": "^3.0|^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "JeffersonGoncalves\\Quebec\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JeffersonGoncalves\\Quebec\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint",
+        "analyse": "vendor/bin/phpstan analyse"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JeffersonGoncalves\\Quebec\\QuebecServiceProvider"
+            ],
+            "aliases": {
+                "Quebec": "JeffersonGoncalves\\Quebec\\Facades\\Quebec"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
