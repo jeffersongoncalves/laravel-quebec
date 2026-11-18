@@ -2,6 +2,8 @@
 
 namespace JeffersonGoncalves\Quebec;
 
+use JeffersonGoncalves\Quebec\Commands\InventoryCommand;
+use JeffersonGoncalves\Quebec\Commands\KAnonymityCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -10,9 +12,13 @@ class QuebecServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('laravel-quebec')
+            ->name('quebec')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigrations();
+            ->hasCommands([InventoryCommand::class, KAnonymityCommand::class]);
+    }
+
+    public function packageRegistered(): void
+    {
+        $this->app->singleton(Quebec::class);
     }
 }
